@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 
 const Projects = () => {
   const sectionRef = useRef(null);
@@ -9,7 +9,7 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
+      title: "Marketcito",
       description:
         "A full-stack e-commerce solution built with React, Node.js, and Stripe integration. Features include user authentication, product management, and real-time inventory tracking.",
       technologies: ["React", "Node.js", "MongoDB", "Stripe"],
