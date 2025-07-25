@@ -1,19 +1,17 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import profileImg from "../assets/WhatsApp Image 2025-07-16 at 17.55.44_ce2924e7.jpg";
+import profileImg from "../assets/profile-pic.jpg";
 
 const About = () => {
   const sectionRef = useRef(null);
   const imageRef = useRef(null);
   const textRef = useRef(null);
-  const statsRef = useRef(null);
 
   useEffect(() => {
     const section = sectionRef.current;
     const image = imageRef.current;
     const text = textRef.current;
-    const stats = statsRef.current;
 
     // Split reveal animation
     gsap.fromTo(
@@ -56,27 +54,7 @@ const About = () => {
       }
     );
 
-    // Stats counter animation
-    gsap.fromTo(
-      stats.children,
-      {
-        y: 50,
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: stats,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
+
   }, []);
 
   return (
@@ -136,46 +114,15 @@ const About = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="card text-center">
                 <h3 className="font-semibold text-sky-600 mb-2">Frontend</h3>
-                <p className="text-sm text-gray-600">React, Vue, TypeScript</p>
+                <p className="text-sm text-gray-600">React, Next.js, TypeScript</p>
               </div>
               <div className="card text-center">
                 <h3 className="font-semibold text-mint-600 mb-2">Backend</h3>
                 <p className="text-sm text-gray-600">
-                  Node.js, Python, PostgreSQL
+                  Node.js, C#, PostgreSQL
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Stats Section */}
-        <div
-          ref={statsRef}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20"
-        >
-          <div className="text-center">
-            <div className="text-3xl lg:text-4xl font-bold text-gradient mb-2">
-              50+
-            </div>
-            <p className="text-gray-600">Projects Completed</p>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl lg:text-4xl font-bold text-gradient mb-2">
-              3+
-            </div>
-            <p className="text-gray-600">Years Experience</p>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl lg:text-4xl font-bold text-gradient mb-2">
-              25+
-            </div>
-            <p className="text-gray-600">Happy Clients</p>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl lg:text-4xl font-bold text-gradient mb-2">
-              100%
-            </div>
-            <p className="text-gray-600">Satisfaction Rate</p>
           </div>
         </div>
       </div>
