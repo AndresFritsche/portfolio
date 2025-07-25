@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import profileImg from "../assets/WhatsApp Image 2025-07-16 at 17.55.44_ce2924e7.jpg";
 
 const About = () => {
   const sectionRef = useRef(null);
@@ -83,34 +84,22 @@ const About = () => {
       <div className="container-max">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Image Side */}
-          <div ref={imageRef} className="relative">
+          <div
+            ref={imageRef}
+            className="relative flex flex-col items-center justify-center py-8"
+          >
             <div className="relative z-10">
               {/* Main image placeholder */}
-              <div className="w-full h-96 bg-white backdrop-blur-sm rounded-3xl shadow-soft-lg border border-white/50 overflow-hidden">
-                <div className="w-full h-full bg-white flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-20 h-20 bg-white rounded-2xl mx-auto mb-4 flex items-center justify-center border border-gray-200">
-                      <svg
-                        className="w-10 h-10 text-gray-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                        />
-                      </svg>
-                    </div>
-                    <p className="text-gray-600 font-medium">Profile Photo</p>
-                  </div>
+              <div className="w-full flex flex-col items-center">
+                <div className="w-84 h-84 sm:w-90 sm:h-90 bg-white rounded-2xl mx-auto mb-4 flex items-center justify-center border border-gray-200 shadow-soft-lg overflow-hidden">
+                  <img
+                    src={profileImg}
+                    alt="Profile"
+                    className="w-full h-full object-cover rounded-2xl"
+                  />
                 </div>
               </div>
             </div>
-
-            {/* Decorative elements removed for minimal look */}
           </div>
 
           {/* Text Side */}
