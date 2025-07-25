@@ -77,7 +77,7 @@ const Hero = () => {
             >
               Hi, I'm{' '}
               <span className="text-gradient">
-                Alex
+                Andres
               </span>
             </h1>
             

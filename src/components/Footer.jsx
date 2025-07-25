@@ -60,7 +60,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="mt-12 pt-8 border-t border-gray-200/50 text-center">
           <p className="text-gray-500 text-sm">
-            © {currentYear} Alex Portfolio. Built with React, TailwindCSS & GSAP.
+            © {currentYear} Andres Fritsche. Built with React, TailwindCSS & GSAP.
           </p>
         </div>
       </div>
