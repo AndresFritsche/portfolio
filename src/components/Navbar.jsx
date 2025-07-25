@@ -38,17 +38,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      gsap.to(window, {
-        duration: 1,
-        scrollTo: section,
-        ease: "power2.inOut",
-      });
-    }
-  };
-
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -62,9 +51,9 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8 mx-auto">
             {navItems.map((item) => (
-              <button
+              <a
                 key={item.id}
-                onClick={() => handleNavClick(item.id)}
+                href={`#${item.id}`}
                 className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:text-sky-600 ${
                   activeSection === item.id ? "text-sky-600" : "text-gray-700"
                 }`}
@@ -73,7 +62,7 @@ const Navbar = () => {
                 {activeSection === item.id && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-sky-400 to-mint-400 rounded-full"></div>
                 )}
-              </button>
+              </a>
             ))}
           </div>
 
