@@ -45,11 +45,6 @@ const Skills = () => {
     "Stripe",
     "Prisma",
     "Vercel",
-    "Netlify",
-    "GitHub Actions",
-    "Jenkins",
-    "Linux",
-    "Nginx",
   ];
 
   // Carousel navigation
