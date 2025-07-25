@@ -37,9 +37,9 @@
     @apply max-w-7xl mx-auto;
   }
   
-  .text-gradient {
+ .text-gradient {
     @apply bg-gradient-to-r from-sky-600 via-mint-600 to-lavender-600 bg-clip-text text-transparent;
-  }
+  } 
 }
 
 /* Custom scrollbar */
