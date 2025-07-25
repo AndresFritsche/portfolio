@@ -1,170 +1,161 @@
-import React, { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import React, { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
 
 const Skills = () => {
-  const sectionRef = useRef(null)
-  const skillsRef = useRef([])
-  const progressRef = useRef([])
+  const sectionRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const categoryRefs = useRef([]);
 
   const skillCategories = [
     {
       title: "Frontend Development",
       skills: [
-        { name: "React", level: 90, icon: "⚛️" },
-        { name: "JavaScript", level: 95, icon: "🟨" },
-        { name: "TypeScript", level: 85, icon: "🔷" },
-        { name: "CSS/SCSS", level: 90, icon: "🎨" },
-        { name: "Tailwind CSS", level: 88, icon: "💨" },
-        { name: "Vue.js", level: 80, icon: "💚" }
-      ]
+        "React",
+        "JavaScript",
+        "TypeScript",
+        "CSS/SCSS",
+        "Tailwind CSS",
+        "Vue.js",
+      ],
     },
     {
       title: "Backend Development",
       skills: [
-        { name: "Node.js", level: 88, icon: "🟢" },
-        { name: "Python", level: 85, icon: "🐍" },
-        { name: "Express.js", level: 90, icon: "🚀" },
-        { name: "PostgreSQL", level: 82, icon: "🐘" },
-        { name: "MongoDB", level: 85, icon: "🍃" },
-        { name: "REST APIs", level: 92, icon: "🔗" }
-      ]
+        "Node.js",
+        "Python",
+        "Express.js",
+        "PostgreSQL",
+        "MongoDB",
+        "REST APIs",
+      ],
     },
     {
       title: "Tools & Technologies",
-      skills: [
-        { name: "Git", level: 90, icon: "📝" },
-        { name: "Docker", level: 75, icon: "🐳" },
-        { name: "AWS", level: 70, icon: "☁️" },
-        { name: "Figma", level: 85, icon: "🎭" },
-        { name: "Webpack", level: 80, icon: "📦" },
-        { name: "Jest", level: 85, icon: "🧪" }
-      ]
-    }
-  ]
+      skills: ["Git", "Docker", "AWS", "Figma", "Webpack", "Jest"],
+    },
+  ];
+
+  const otherTechnologies = [
+    "GraphQL",
+    "Redux",
+    "Next.js",
+    "Nuxt.js",
+    "Socket.io",
+    "Firebase",
+    "Stripe",
+    "Prisma",
+    "Vercel",
+    "Netlify",
+    "GitHub Actions",
+    "Jenkins",
+    "Linux",
+    "Nginx",
+  ];
+
+  // Carousel navigation
+  const goToPrev = () =>
+    setCurrentIndex((prev) =>
+      prev === 0 ? skillCategories.length - 1 : prev - 1
+    );
+  const goToNext = () =>
+    setCurrentIndex((prev) =>
+      prev === skillCategories.length - 1 ? 0 : prev + 1
+    );
 
   useEffect(() => {
-    const skills = skillsRef.current
-    const progressBars = progressRef.current
-
-    // Animate skill cards
-    gsap.fromTo(skills, 
-      { 
-        y: 60, 
-        opacity: 0,
-        scale: 0.9
-      },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 70%',
-          end: 'bottom 30%',
-          toggleActions: 'play none none reverse'
-        }
-      }
-    )
-
-    // Animate progress bars
-    progressBars.forEach((bar, index) => {
-      if (bar) {
-        const skillLevel = bar.dataset.level
-        gsap.fromTo(bar, 
-          { 
-            width: '0%' 
-          },
-          {
-            width: `${skillLevel}%`,
-            duration: 1.5,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: bar,
-              start: 'top 85%',
-              toggleActions: 'play none none reverse'
-            }
-          }
-        )
-      }
-    })
-
-  }, [])
+    // Animate the current category in
+    if (categoryRefs.current[currentIndex]) {
+      gsap.fromTo(
+        categoryRefs.current[currentIndex],
+        { x: 60, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.7, ease: "power3.out" }
+      );
+    }
+  }, [currentIndex]);
 
   return (
-    <section id="skills" ref={sectionRef} className="section-padding bg-gradient-to-br from-mint-50/30 to-sky-50/30">
+    <section id="skills" ref={sectionRef} className="section-padding bg-white">
       <div className="container-max">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            My <span className="text-gradient">Skills</span>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-gray-900">
+            My <span className="text-sky-600">Skills</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            I'm passionate about learning new technologies and constantly improving my skills 
-            to deliver the best solutions for every project.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            I focus on mastering core technologies and tools to deliver clean,
+            efficient solutions.
           </p>
         </div>
 
-        {/* Skills Categories */}
-        <div className="grid lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, categoryIndex) => (
-            <div key={categoryIndex} className="space-y-6">
-              <h3 className="text-2xl font-semibold text-center mb-8 text-gray-800">
-                {category.title}
-              </h3>
-              
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => {
-                  const globalIndex = categoryIndex * 6 + skillIndex
-                  return (
-                    <div
-                      key={skillIndex}
-                      ref={el => skillsRef.current[globalIndex] = el}
-                      className="card group hover:shadow-soft-lg transition-all duration-300"
+        {/* Carousel */}
+        <div className="relative flex items-center justify-center max-w-xl mx-auto mb-12">
+          <button
+            aria-label="Previous"
+            onClick={goToPrev}
+            className="absolute left-0 z-10 p-2 rounded-full border border-gray-300 bg-white hover:bg-gray-100 transition disabled:opacity-40"
+            disabled={skillCategories.length <= 1}
+          >
+            <span className="text-2xl">&#8592;</span>
+          </button>
+          <div className="w-full px-8">
+            {skillCategories.map((category, idx) => (
+              <div
+                key={category.title}
+                ref={(el) => (categoryRefs.current[idx] = el)}
+                className={`transition-opacity duration-500 ${
+                  idx === currentIndex ? "block" : "hidden"
+                }`}
+              >
+                <h3 className="text-2xl font-semibold text-center mb-6 text-gray-800">
+                  {category.title}
+                </h3>
+                <ul className="space-y-2 text-center">
+                  {category.skills.map((skill, i) => (
+                    <li
+                      key={skill}
+                      className="text-lg text-gray-700 tracking-wide fade-in-up"
                     >
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center space-x-3">
-                          <span className="text-2xl">{skill.icon}</span>
-                          <span className="font-medium text-gray-800">{skill.name}</span>
-                        </div>
-                        <span className="text-sm font-semibold text-sky-600">{skill.level}%</span>
-                      </div>
-                      
-                      {/* Progress Bar */}
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div
-                          ref={el => progressRef.current[globalIndex] = el}
-                          data-level={skill.level}
-                          className="h-2 bg-gradient-to-r from-sky-400 to-mint-400 rounded-full transition-all duration-300"
-                          style={{ width: '0%' }}
-                        ></div>
-                      </div>
-                    </div>
-                  )
-                })}
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
+            ))}
+          </div>
+          <button
+            aria-label="Next"
+            onClick={goToNext}
+            className="absolute right-0 z-10 p-2 rounded-full border border-gray-300 bg-white hover:bg-gray-100 transition disabled:opacity-40"
+            disabled={skillCategories.length <= 1}
+          >
+            <span className="text-2xl">&#8594;</span>
+          </button>
+        </div>
+
+        {/* Carousel indicators */}
+        <div className="flex justify-center gap-2 mb-10">
+          {skillCategories.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentIndex(idx)}
+              className={`w-2.5 h-2.5 rounded-full border border-sky-500 transition ${
+                currentIndex === idx ? "bg-sky-500" : "bg-white"
+              }`}
+              aria-label={`Go to slide ${idx + 1}`}
+            />
           ))}
         </div>
 
-        {/* Additional Skills Badges */}
-        <div className="mt-16 text-center">
-          <h3 className="text-xl font-semibold mb-8 text-gray-800">
+        {/* Redesigned Other Technologies Badges */}
+        <div className="mt-10 text-center">
+          <h3 className="text-lg font-semibold mb-6 text-gray-800">
             Other Technologies I Work With
           </h3>
-          
-          <div className="flex flex-wrap justify-center gap-3">
-            {[
-              "GraphQL", "Redux", "Next.js", "Nuxt.js", "Socket.io", 
-              "Firebase", "Stripe", "Prisma", "Vercel", "Netlify",
-              "GitHub Actions", "Jenkins", "Linux", "Nginx"
-            ].map((tech, index) => (
+          <div className="flex flex-wrap justify-center gap-2">
+            {otherTechnologies.map((tech, index) => (
               <span
                 key={index}
-                className="px-4 py-2 bg-white/70 backdrop-blur-sm text-gray-700 rounded-full text-sm font-medium shadow-soft hover:shadow-soft-lg hover:scale-105 transition-all duration-300 cursor-default"
+                className="px-3 py-1 border border-gray-400 text-gray-700 rounded-full text-sm font-medium bg-white hover:bg-gray-100 transition cursor-default shadow-sm"
               >
                 {tech}
               </span>
@@ -173,7 +164,7 @@ const Skills = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Skills
+export default Skills;

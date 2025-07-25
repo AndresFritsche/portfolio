@@ -1,15 +1,16 @@
-import React from 'react'
+import React from "react";
+import { Github, Linkedin, Twitter, Mail } from "lucide-react";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-br from-gray-50 to-mint-50/30 border-t border-gray-200/50">
+    <footer className="section-padding bg-white">
       <div className="container-max section-padding">
         <div className="grid md:grid-cols-3 gap-8 items-center">
           {/* Logo & Description */}
           <div className="text-center md:text-left">
-            <div className="text-2xl font-bold text-gradient mb-3">
+            <div className="text-2xl font-bold text-sky-600 mb-3">
               Portfolio
             </div>
             <p className="text-gray-600 text-sm">
@@ -20,30 +21,38 @@ const Footer = () => {
           {/* Quick Links */}
           <div className="text-center">
             <div className="flex flex-wrap justify-center gap-6">
-              {['Home', 'About', 'Projects', 'Skills', 'Contact'].map((link) => (
-                <button
-                  key={link}
-                  onClick={() => {
-                    const section = document.getElementById(link.toLowerCase())
-                    if (section) {
-                      section.scrollIntoView({ behavior: 'smooth' })
-                    }
-                  }}
-                  className="text-gray-600 hover:text-sky-600 transition-colors text-sm font-medium"
-                >
-                  {link}
-                </button>
-              ))}
+              {["Home", "About", "Projects", "Skills", "Contact"].map(
+                (link) => (
+                  <button
+                    key={link}
+                    onClick={() => {
+                      const section = document.getElementById(
+                        link.toLowerCase()
+                      );
+                      if (section) {
+                        section.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }}
+                    className="text-gray-600 hover:text-sky-600 transition-colors text-sm font-medium"
+                  >
+                    {link}
+                  </button>
+                )
+              )}
             </div>
           </div>
 
           {/* Social Links */}
           <div className="flex justify-center md:justify-end space-x-4">
             {[
-              { name: 'GitHub', icon: '🐙', url: '#' },
-              { name: 'LinkedIn', icon: '💼', url: '#' },
-              { name: 'Twitter', icon: '🐦', url: '#' },
-              { name: 'Email', icon: '📧', url: 'mailto:hello@alexportfolio.com' }
+              { name: "GitHub", icon: <Github size={22} />, url: "#" },
+              { name: "LinkedIn", icon: <Linkedin size={22} />, url: "#" },
+              { name: "Twitter", icon: <Twitter size={22} />, url: "#" },
+              {
+                name: "Email",
+                icon: <Mail size={22} />,
+                url: "mailto:hello@alexportfolio.com",
+              },
             ].map((social) => (
               <a
                 key={social.name}
@@ -60,12 +69,13 @@ const Footer = () => {
         {/* Copyright */}
         <div className="mt-12 pt-8 border-t border-gray-200/50 text-center">
           <p className="text-gray-500 text-sm">
-            © {currentYear} Andres Fritsche. Built with React, TailwindCSS & GSAP.
+            © {currentYear} Andres Fritsche. Built with React, TailwindCSS &
+            GSAP.
           </p>
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
