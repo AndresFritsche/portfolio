@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-
 const Projects = () => {
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
@@ -13,7 +12,7 @@ const Projects = () => {
       description:
         "A full-stack e-commerce solution built with React, Node.js, and Stripe integration. Features include user authentication, product management, and real-time inventory tracking.",
       technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      image: "/src/assets/marketcito.PNG",
+      image: "/assets/marketcito.PNG",
       color: "from-sky-400 to-mint-400",
     },
     {
@@ -22,7 +21,7 @@ const Projects = () => {
       description:
         "A collaborative project management tool with real-time updates, drag-and-drop functionality, and team collaboration features.",
       technologies: ["Vue.js", "Firebase", "Vuetify"],
-      image: "/src/assets/jobtracker.PNG",
+      image: "/assets/jobtracker.PNG",
       color: "from-lavender-400 to-blush-400",
     },
     {
@@ -143,16 +142,27 @@ const Projects = () => {
               <div className="card h-full hover:shadow-soft-lg transition-all duration-300">
                 {/* Project Image */}
                 <div className="w-full h-48 rounded-xl mb-6 overflow-hidden">
-                  {project.id <= 2 ? (
+                  {typeof project.image === 'string' && project.image.length <= 3 ? (
+                    // Render emoji with gradient background
+                    <div className={`w-full h-full bg-gradient-to-br ${project.color} flex items-center justify-center text-6xl`}>
+                      {project.image}
+                    </div>
+                  ) : (
+                    // Render image
                     <img 
                       src={project.image} 
                       alt={project.title}
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Fallback to gradient background if image fails to load
+                        e.target.style.display = 'none';
+                        e.target.parentElement.innerHTML = `
+                          <div class="w-full h-full bg-gradient-to-br ${project.color} flex items-center justify-center text-6xl">
+                            ${project.title.charAt(0)}
+                          </div>
+                        `;
+                      }}
                     />
-                  ) : (
-                    <div className={`w-full h-full bg-gradient-to-br ${project.color} flex items-center justify-center text-6xl`}>
-                      {project.image}
-                    </div>
                   )}
                 </div>
 

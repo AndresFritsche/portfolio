@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import profileImg from "../assets/profile-pic.jpg";
+const profileImg = "/assets/profile-pic.jpg";
 
 const About = () => {
   const sectionRef = useRef(null);
