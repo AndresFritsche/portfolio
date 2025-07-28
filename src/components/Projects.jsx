@@ -13,16 +13,16 @@ const Projects = () => {
       description:
         "A full-stack e-commerce solution built with React, Node.js, and Stripe integration. Features include user authentication, product management, and real-time inventory tracking.",
       technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      image: "🛍️",
+      image: "/src/assets/marketcito.PNG",
       color: "from-sky-400 to-mint-400",
     },
     {
       id: 2,
-      title: "Task Management App",
+      title: "Job Tracker Pro",
       description:
         "A collaborative project management tool with real-time updates, drag-and-drop functionality, and team collaboration features.",
       technologies: ["Vue.js", "Firebase", "Vuetify"],
-      image: "📋",
+      image: "/src/assets/jobtracker.PNG",
       color: "from-lavender-400 to-blush-400",
     },
     {
@@ -141,11 +141,19 @@ const Projects = () => {
               className="group cursor-pointer"
             >
               <div className="card h-full hover:shadow-soft-lg transition-all duration-300">
-                {/* Project Image/Icon */}
-                <div
-                  className={`w-full h-48 bg-gradient-to-br ${project.color} rounded-xl mb-6 flex items-center justify-center text-6xl`}
-                >
-                  {project.image}
+                {/* Project Image */}
+                <div className="w-full h-48 rounded-xl mb-6 overflow-hidden">
+                  {project.id <= 2 ? (
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className={`w-full h-full bg-gradient-to-br ${project.color} flex items-center justify-center text-6xl`}>
+                      {project.image}
+                    </div>
+                  )}
                 </div>
 
                 {/* Project Content */}
